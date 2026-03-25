@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="MovieCatalog.Api.Application/MovieCatalog.Api.Application.csproj" Id="1a9d4510-9436-420a-a3e2-cb3914dac0cf" />
+  <Project Path="MovieCatalog.Api.Common/MovieCatalog.Api.Common.csproj" Id="49f58db6-492d-4fc8-9104-b8d9d600a435" />
+  <Project Path="MovieCatalog.Api.Domain/MovieCatalog.Api.Domain.csproj" Id="2e1e5251-bf03-472f-adaa-0ef173dcac37" />
+  <Project Path="MovieCatalog.Api/MovieCatalog.Api.csproj" />
+</Solution>

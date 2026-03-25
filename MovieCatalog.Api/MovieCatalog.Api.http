@@ -1,0 +1,271 @@
+@MovieCatalog.Api_HostAddress = https://localhost:7067
+@host = https://localhost:7067
+@movieId=7
+@reviewId=1
+@token = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjYTI4MDU2NC01YWQ2LTRkZjctOWVmMy04YWMwMjFhMTg1YTAiLCJlbWFpbCI6InRoaXJkVXNlckBsb2NhbGhvc3QuY29tIiwianRpIjoiZjVjM2U5NzYtMTljNy00NjUzLWEzZmEtODI3MmQyNGRiM2Y0IiwibmFtZSI6IlRoaXJkIEpvaG4iLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJVc2VyIiwiZXhwIjoxNzc0MjcyNjI1LCJpc3MiOiJNb3ZpZUNhdGFsb2dBcGkiLCJhdWQiOiJNb3ZpZUNhdGFsb2dBcGlDbGllbnQifQ.k4apb_FWlqfy-jNZ2yOZWLqLCzrHRHbNwsdR1CmRrqE
+@adminToken = eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiIxYTlmNmY0ZC0zOGNiLTRjZmMtYjBjYi1iYmY1OTI5M2Q3M2QiLCJlbWFpbCI6Im1vdmllQWRtaW4zQGxvY2FsaG9zdC5jb20iLCJqdGkiOiIwODNkNzhkMC1mOGRlLTQwOTAtODJiYy00YTE5YjlhYjIxNjQiLCJuYW1lIjoiTW92aWVBZG1pbjMgU2FyYWgiLCJodHRwOi8vc2NoZW1hcy5taWNyb3NvZnQuY29tL3dzLzIwMDgvMDYvaWRlbnRpdHkvY2xhaW1zL3JvbGUiOiJNb3ZpZSBBZG1pbiIsImV4cCI6MTc3Mzk5OTk5NCwiaXNzIjoiTW92aWVDYXRhbG9nQXBpIiwiYXVkIjoiTW92aWVDYXRhbG9nQXBpQ2xpZW50In0.KGjqqTRD7jyhQajFo4y8r0DubKx74IBR8TA-A0L_FLo
+
+#################################################
+#GENRES
+
+
+GET {{host}}/api/genres
+Authorization: Bearer {{token}}  
+//Authorization: Bearer {{adminToken}}  
+
+###
+
+POST {{host}}/api/genres
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+{
+  "name": "Comedy/Drama"
+}
+
+###
+
+@id=40
+DELETE {{host}}/api/genres/{{id}}
+Authorization: Bearer {{adminToken}}  
+
+###
+
+GET {{host}}/api/genres/{{id}}
+Authorization: Bearer {{token}} 
+//Authorization: Bearer {{adminToken}}  
+
+
+###
+
+PUT {{host}}/api/genres/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+{ 
+  "id": 9,
+  "name": "Drama/Thriller"
+}
+
+###
+
+#############################################################
+#MOVIES 
+#@id=20
+
+GET {{host}}/api/movies?pageNumber=1&pageSize=20
+Authorization: Bearer {{token}}  
+//Authorization: Bearer {{adminToken}}  
+###
+
+GET {{host}}/api/movies/my-movies?pageNumber=1&pageSize=20
+Authorization: Bearer {{adminToken}}
+
+###
+
+POST {{host}}/api/movies
+Content-Type: application/json
+Authorization: Bearer {{adminToken}} 
+
+{ 
+  "title": "Shelter",
+  "description": "Ayoung girl needs refuge and shelter from her estrange uncle.",
+  "releaseYear": 2026,
+  "director": "Jason Stratham",
+  "genreId": 2,
+  "buyPrice": 500,
+  "rentPrice": 200  
+}
+
+###
+
+DELETE {{host}}/api/movies/{{id}}
+Authorization: Bearer {{adminToken}}  
+
+###
+
+GET {{host}}/api/movies/{{id}}      
+Authorization: Bearer {{token}}  
+//Authorization: Bearer {{adminToken}}  
+
+###
+
+PUT {{host}}/api/movies/{{id}}
+Content-Type: application/json
+Authorization: Bearer {{adminToken}} 
+{
+  "id": 24,
+  "title": "SpiderMan",
+  "description": "Peter parker on an excellent adventure.",
+  "releaseYear": 2018,
+  "director": "Bob Persichetti, Peter Ramsey, Rodney Rothman",
+  "genreId": 2
+}
+
+###
+
+###############################################################
+#REGISTER AND LOGIN
+
+POST {{host}}/api/defaultAuth/register
+Content-Type: application/json
+ 
+{ 
+  "email": "User@localhost.com",
+  "password": "Gas@123"
+}
+
+###
+
+POST {{host}}/api/auth/register
+Content-Type: application/json
+
+{
+  "firstName": "Eugene",
+  "lastName": "MovieAdmin4",
+  "email": "movieAdmin4@localhost.com",
+  "password": "Gas@123",
+  "role": "Movie Admin"
+}
+
+###
+
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "thirdUser@localhost.com",
+  "password": "Gas@123"
+}
+
+###
+
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "secondUser@localhost.com",
+  "password": "Gas@123"
+}
+
+###
+
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "movieAdmin2@localhost.com",
+  "password": "Gas@123"
+}
+
+###
+
+POST {{host}}/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "movieAdmin3@localhost.com",
+  "password": "Gas@123"
+}
+
+###
+
+#################################################################
+#REVIEWS
+
+GET {{host}}/api/movies/{{movieId}}/reviews
+Authorization: Bearer {{token}}
+
+###
+
+POST {{host}}/api/movies/{{movieId}}/reviews
+Content-Type: application/json
+Authorization: Bearer {{token}}
+{
+  "rating": 1,
+  "comment": "Boring"
+}
+
+###
+
+DELETE {{host}}/api/movies/{{movieId}}/reviews/{{reviewId}}
+Authorization: Bearer {{adminToken}} 
+
+###
+
+PUT {{host}}/api/movies/{{movieId}}/reviews/{{reviewId}}
+Content-Type: application/json
+Authorization: Bearer {{adminToken}} 
+{
+  "rating": 3,
+  "comment": "Nice, epic and action pack movie."
+}
+
+###
+
+###############################################################
+#FAVORITE MOVIES
+
+GET {{host}}/api/favoritemovies
+Authorization: Bearer {{token}}  
+
+###
+
+POST {{host}}/api/favoritemovies
+Content-Type: application/json
+Authorization: Bearer {{token}}  
+
+{
+  "movieId": 25
+}
+
+###
+
+DELETE {{host}}/api/favoritemovies/{{movieId}}
+Authorization: Bearer {{token}}  
+
+###
+
+#############################################################
+#TRANSACTIONS
+
+
+POST {{host}}/api/transactions
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+    "movieId": 37,
+    "type": "Rent"
+}
+
+###
+
+GET {{host}}/api/transactions/my-transactions
+Authorization: Bearer {{token}}
+
+###
+
+GET {{host}}/api/transactions/{{id}}
+Authorization: Bearer {{token}}
+
+###
+
+@transactionId=1
+POST {{host}}/api/transactions/{{transactionId}}/return
+Authorization: Bearer {{token}}
+
+###
+
+POST {{host}}/api/transactions/top-up
+Content-Type: application/json
+Authorization: Bearer {{token}}
+
+{
+  "amount": 5000
+}
+
+###
+
+GET {{host}}/api/transactions/balance
+Authorization: Bearer {{token}}
+
+###
