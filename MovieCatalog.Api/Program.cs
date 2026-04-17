@@ -89,3 +89,4 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+// The app will run
