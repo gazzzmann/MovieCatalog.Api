@@ -10,7 +10,7 @@ using MovieCatalog.Api.Common.Results;
 using MovieCatalog.Api.Domain;
 
 namespace MovieCatalog.Api.Application.Services;
-
+// The Transaction Service
 public class TransactionsService(
     MovieCatalogDbContext context,
     IUsersService usersService) : ITransactionsService
