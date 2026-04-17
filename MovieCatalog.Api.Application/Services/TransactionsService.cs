@@ -53,6 +53,7 @@ public class TransactionsService(
         return Result<TransactionDto>.Success(
             MapToDto(transaction, transaction.Movie.Title));
     }
+
     public async Task<Result<TransactionDto>> CreateTransactionAsync(CreateTransactionDto dto)
     {
         var userId = usersService.UserId;
@@ -79,27 +80,29 @@ public class TransactionsService(
                 new Error(ErrorCodes.Validation, "User not found"));
         }
 
-        // Prevent duplicate BUY
+        
         var alreadyBought = await context.MovieTransactions
             .AnyAsync(t =>
                 t.MovieId == dto.MovieId &&
                 t.UserId == userId &&
                 t.Type == TransactionType.Buy);
 
+
+        //Prevent Duplicate BUY
         if (dto.Type == TransactionType.Buy && alreadyBought)
         {
             return Result<TransactionDto>.Failure(
                 new Error(ErrorCodes.Validation, "You already purchased this movie"));
         }
 
-        //Prevent RENT if already bought
+        
         if (dto.Type == TransactionType.Rent && alreadyBought)
         {
             return Result<TransactionDto>.Failure(
                 new Error(ErrorCodes.Validation, "You already own this movie"));
         }
 
-        //Prevent duplicate RENT (active rental)
+       
         if (dto.Type == TransactionType.Rent)
         {
             var alreadyRented = await context.MovieTransactions
@@ -149,6 +152,7 @@ public class TransactionsService(
         return Result<TransactionDto>.Success(
             MapToDto(transaction, movie.Title));
     }
+
     public async Task<Result<TransactionDto>> ReturnMovieAsync(int transactionId)
     {
         var transaction = await context.MovieTransactions
@@ -245,7 +249,6 @@ public class TransactionsService(
 
         return Result<decimal>.Success(user.WalletBalance);
     }
-
 
     private static TransactionDto MapToDto(MovieTransaction t, string movieTitle) =>
         new()
