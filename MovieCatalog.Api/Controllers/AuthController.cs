@@ -4,6 +4,7 @@ using MovieCatalog.Api.Application.Contracts;
 using MovieCatalog.Api.Application.DTOs.Auth;
 
 namespace MovieCatalog.Api.Controllers;
+// Comtroller
 
 [Route("api/[controller]")]
 [ApiController]
